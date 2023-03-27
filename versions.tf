@@ -3,10 +3,6 @@ terraform {
   cloud {
     organization = "heicorp"
     hostname = "app.terraform.io"
-
-    workspaces {
-      tags = ["networking", "source:cli"]
-    }
   }
 
   required_providers {
