@@ -1,5 +1,5 @@
-resource "hcloud_server" "my_ci_sandbox" {
-  name        = "my_ci_sandbox"
+resource "hcloud_server" "my_cisandbox" {
+  name        = "mycisandbox"
   image       = "ubuntu-22.04"
   server_type = "cpx11"
   public_net {
