@@ -1,4 +1,14 @@
 terraform {
+  # use terraform cloud for backend
+  cloud {
+    organization = "heicorp"
+    hostname = "app.terraform.io"
+
+    workspaces {
+      tags = ["networking", "source:cli"]
+    }
+  }
+
   required_providers {
     hcloud = {
       source = "hetznercloud/hcloud"
@@ -8,6 +18,6 @@ terraform {
 }
 
 provider "hcloud" {
-  # Configuration options
+  # set token in env var
   token = var.hcloud_token
 }
