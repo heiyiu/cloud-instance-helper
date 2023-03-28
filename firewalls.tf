@@ -1,3 +1,4 @@
+# allow ssh connection from home ip address
 resource "hcloud_firewall" "server_firewall" {
   name = "server-firewall"
   rule {
