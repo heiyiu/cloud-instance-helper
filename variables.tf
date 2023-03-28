@@ -1,9 +1,7 @@
-# normally terraform variables are in lowercase 
-# but github forces env var to be in all caps
-variable "HCLOUD_TOKEN" {
+variable "hcloud_token" {
   sensitive = true
 }
 
-variable "HOME_IP" {
+variable "home_ip" {
   sensitive = true
 }
