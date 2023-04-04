@@ -1,7 +1,7 @@
 resource "hcloud_server" "my_cisandbox" {
   name         = "mycisandbox"
   image        = "ubuntu-22.04"
-  server_type  = "cpx31"
+  server_type  = "cpx41"
   location     = "ash"
   firewall_ids = [hcloud_firewall.server_firewall.id]
   user_data    = file("./cloud-init.yaml")
