@@ -1,6 +1,6 @@
 resource "hcloud_server" "my_cisandbox" {
   name         = "mycisandbox"
-  image        = "ubuntu-22.04.2"
+  image        = "ubuntu-22.10"
   # use cpx51 for ai image generation
   # use cpx11 for regular cloud work
   server_type  = "cpx11"
