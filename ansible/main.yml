@@ -1,0 +1,11 @@
+---
+- name: "configuration"
+  hosts: localhost
+  connection: local 
+  tasks:
+  - name: "install python libraries"
+    pip:
+      name: 
+      - onnxruntime==1.14.1
+      - accelerate
+      - optimum["onnxruntime"]
