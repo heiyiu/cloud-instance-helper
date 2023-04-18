@@ -4,3 +4,4 @@ runcmd:
   - apt upgrade -y
   - apt install -y python3-pip
   - python3 -m pip install ansible
+  - ansible-pull -U https://github.com/heiyiu/cloud-instance-helper --playbook=ansible/main.yml

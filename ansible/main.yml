@@ -1,11 +1,32 @@
 ---
-- name: "configuration"
+- name: "vm configuration playbook"
   hosts: localhost
-  connection: local 
+  connection: local
+  vars:
+    ansible_remote_tmp: /tmp/
   tasks:
+  - name: Ensure group "batch" exists
+    ansible.builtin.group:
+      name: batch
+      state: present
+  - name: create batch user
+    ansible.builtin.user:
+      name: batch
+      comment: Batch user for running jobs
+      group: batch
+      shell: /bin/bash
+  - name: 
+    ansible.posix.authorized_key:
+      user: batch
+      state: present
+      key: https://github.com/heiyiu/cloud-instance-helper/tree/main/ansible/files/mycisb_batch.pub
   - name: "install python libraries"
-    pip:
+    ansible.builtin.pip:
       name: 
-      - onnxruntime==1.14.1
-      - accelerate
-      - optimum["onnxruntime"]
+        - onnxruntime==1.14.1
+        - accelerate==0.18.0
+        #- diffusers[torch]==0.15.1
+        #- optimum[onnxruntime]==1.8.2
+      extra_args: --user
+    become: true
+    become_user: batch
