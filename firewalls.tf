@@ -4,7 +4,7 @@ resource "hcloud_firewall" "server_firewall" {
   rule {
     direction  = "in"
     protocol   = "tcp"
-    port       = "22"
+    port       = "22,80,443,8443"
     source_ips = [
       format("%s/32", var.home_ip)
     ]
