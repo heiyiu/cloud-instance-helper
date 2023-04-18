@@ -1,3 +1,4 @@
-data "hcloud_image" "available_ubuntu22_images" {
-  name              = "ubuntu-22.04"
+# ip of the created vm
+output "my_cisandbox_ipv4_address" {
+  value = hcloud_server.my_cisandbox.ipv4_address
 }

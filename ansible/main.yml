@@ -15,11 +15,6 @@
       comment: Batch user for running jobs
       group: batch
       shell: /bin/bash
-  - name: 
-    ansible.posix.authorized_key:
-      user: batch
-      state: present
-      key: https://raw.githubusercontent.com/heiyiu/cloud-instance-helper/main/ansible/files/mycisb_batch.pub
   - name: "install python libraries"
     ansible.builtin.pip:
       name:
