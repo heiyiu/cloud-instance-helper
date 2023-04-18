@@ -19,10 +19,11 @@
     ansible.posix.authorized_key:
       user: batch
       state: present
-      key: https://github.com/heiyiu/cloud-instance-helper/tree/main/ansible/files/mycisb_batch.pub
+      key: https://raw.githubusercontent.com/heiyiu/cloud-instance-helper/main/ansible/files/mycisb_batch.pub
   - name: "install python libraries"
     ansible.builtin.pip:
-      name: 
+      name:
+        - torch==2.0.0 
         - onnxruntime==1.14.1
         - accelerate==0.18.0
         #- diffusers[torch]==0.15.1
