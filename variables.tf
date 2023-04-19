@@ -4,8 +4,10 @@ variable "hcloud_token" {
 
 variable "home_ip" {
   sensitive = true
+  default   = "0.0.0.0"
 }
 
 variable "home_ipv6" {
   sensitive = true
+  default   = "::"
 }
