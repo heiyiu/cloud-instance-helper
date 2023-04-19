@@ -1,0 +1,14 @@
+# download and install k0s
+- name: download k0s
+  ansible.builtin.get_url:
+    url: https://get.k0s.sh
+    dest: "{{ k0s_installer_path }}"
+- name: run k0s setup script
+  command: bash "{{ k0s_installer_path }}" 
+- name: install k0s as service
+  command: k0s install controller --single
+- name: start k0s
+  service:
+    name: k0scontroller
+    enabled: true
+    state: started
