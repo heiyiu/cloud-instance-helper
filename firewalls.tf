@@ -7,14 +7,7 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "22"
     source_ips = [
-      format("%s/32", var.home_ip)
-    ]
-  }
-  # ssh for ipv6
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    source_ips = [
+      format("%s/32", var.home_ip),
       format("%s/64", var.home_ipv6)
     ]
   }
