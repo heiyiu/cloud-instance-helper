@@ -13,7 +13,7 @@ resource "hcloud_server" "my_cisandbox" {
   # ipv6 only is cheaper
 
   public_net {
-    ipv4_enabled = false
+    ipv4_enabled = true
     ipv6_enabled = true
   }
 
