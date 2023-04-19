@@ -7,7 +7,8 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "22"
     source_ips = [
-      format("%s/32", var.home_ip)
+      format("%s/32", var.home_ip),
+      format("%s/64", var.home_ipv6)
     ]
   }
   # http
@@ -16,7 +17,8 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "80"
     source_ips = [
-      format("%s/32", var.home_ip)
+      format("%s/32", var.home_ip),
+      format("%s/64", var.home_ipv6)
     ]
   }
   # https
@@ -25,7 +27,8 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "443"
     source_ips = [
-      format("%s/32", var.home_ip)
+      format("%s/32", var.home_ip),
+      format("%s/64", var.home_ipv6)
     ]
   }
   # https
@@ -34,7 +37,8 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "8443"
     source_ips = [
-      format("%s/32", var.home_ip)
+      format("%s/32", var.home_ip),
+      format("%s/64", var.home_ipv6)
     ]
   }
   # kubernetes node ports
@@ -43,7 +47,8 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "30000-32767"
     source_ips = [
-      format("%s/32", var.home_ip)
+      format("%s/32", var.home_ip),
+      format("%s/64", var.home_ipv6)
     ]
   }
 }
