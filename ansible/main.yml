@@ -30,12 +30,12 @@
   - name: "install k0s"
     ansible.builtin.include_tasks:
       file: tasks/install_k0s.yml
-      vars:
-        k0s_installer_path: /tmp/k0s.sh
+    vars:
+      k0s_installer_path: /tmp/k0s.sh
     when: install_k0s
   - name: "install k3s"
     ansible.builtin.include_tasks:
       file: tasks/install_k3s.yml
-      vars:
-        k3s_installer_path: /tmp/k3s.sh
+    vars:
+      k3s_installer_path: /tmp/k3s.sh
     when: install_k3s
