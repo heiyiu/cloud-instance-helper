@@ -11,8 +11,8 @@
   - name: create app user
     ansible.builtin.include_tasks:
       file: tasks/create_user.yml
-      vars:
-        username: batch
+    vars:
+      username: batch
   # install libraries needed for image processing
   - name: "install python libraries"
     ansible.builtin.pip:
