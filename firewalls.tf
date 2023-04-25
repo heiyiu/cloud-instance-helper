@@ -8,7 +8,7 @@ resource "hcloud_firewall" "server_firewall" {
     port       = "22"
     source_ips = [
       format("%s/32", var.home_ip),
-      format("%s/64", var.home_ipv6)
+      format("%s/128", var.home_ipv6)
     ]
   }
   # http

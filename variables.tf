@@ -7,6 +7,7 @@ variable "home_ip" {
   default   = "127.0.0.1"
 }
 
+# default is loopback
 variable "home_ipv6" {
   sensitive = true
   default   = "::1"
