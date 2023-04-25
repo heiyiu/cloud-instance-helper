@@ -8,16 +8,12 @@
     install_k0s: true
   tasks:
   # create a batch user for running batch jobs
-  - name: Ensure group "batch" exists
-    ansible.builtin.group:
-      name: batch
-      state: present
-  - name: create batch user
-    ansible.builtin.user:
-      name: batch
-      comment: Batch user for running jobs
-      group: batch
-      shell: /bin/bash
+  - name: create app user
+    ansible.builtin.include_tasks:
+      file: tasks/create_user.yml
+      vars:
+        username: batch
+  # install libraries needed for image processing
   - name: "install python libraries"
     ansible.builtin.pip:
       name:
@@ -30,6 +26,7 @@
       extra_args: --user
     become: true
     become_user: batch
+  # install the select k0s distribution
   - name: "install k0s"
     ansible.builtin.include_tasks:
       file: tasks/install_k0s.yml
