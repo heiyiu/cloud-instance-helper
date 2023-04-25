@@ -1,0 +1,7 @@
+# download and install k0s
+- name: download k3s
+  ansible.builtin.get_url:
+    url: https://get.k3s.io
+    dest: "{{ k3s_installer_path }}"
+- name: run k3s setup script
+  command: bash "{{ k3s_installer_path }}"

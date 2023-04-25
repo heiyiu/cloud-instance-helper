@@ -38,6 +38,15 @@ resource "hcloud_firewall" "server_firewall" {
       format("%s/32", var.home_ip)
     ]
   }
+  # nginx test port 
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "8080"
+    source_ips = [
+      format("%s/32", var.home_ip)
+    ]
+  }
   # kubernetes node ports
   rule {
     direction  = "in"

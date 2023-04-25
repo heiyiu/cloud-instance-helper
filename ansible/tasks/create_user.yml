@@ -1,4 +1,4 @@
-  # create an user for running jobs
+# create an user for running jobs
 - name: Ensure group "batch" exists
   ansible.builtin.group:
     name: "{{ username }}"
