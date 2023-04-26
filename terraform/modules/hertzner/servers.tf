@@ -8,7 +8,7 @@ resource "hcloud_server" "my_cisandbox" {
   server_type  = "cpx11"
   location     = "ash"
   firewall_ids = [hcloud_firewall.server_firewall.id]
-  user_data    = file("./cloud-init.yaml")
+  user_data    = file("${path.module}/files/cloud-init.yaml")
   ssh_keys     = [hcloud_ssh_key.batch_user_key.id]
   # ipv6 only is cheaper
 

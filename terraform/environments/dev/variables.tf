@@ -2,10 +2,6 @@ variable "hcloud_token" {
   sensitive = true
 }
 
-variable "workspace_tag" {
-  default   = "development"
-}
-
 variable "home_ip" {
   sensitive = true
   default   = "127.0.0.1"
