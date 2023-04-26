@@ -4,9 +4,11 @@ terraform {
   cloud {
     organization = "heicorp"
     hostname = "app.terraform.io"
+  }
+}
 
-    workspaces {
-      tags = [ var.workspace_tag ]
-    }
+provider "terraform" {
+  workspaces {
+    tags = [var.workspace_tag]
   }
 }
