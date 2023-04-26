@@ -5,7 +5,7 @@
 #
 # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 
-name: 'Terraform'
+name: 'Terraform Deployment Workflow Dev'
 
 on:
   push:
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform Deployment Workflow Dev'
+    name: 'Create hertzner cloud stack for dev use'
     runs-on: ubuntu-latest
     environment: development
 
