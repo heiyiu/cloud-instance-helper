@@ -25,6 +25,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./terraform/
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -45,7 +46,6 @@ jobs:
     - name: Terraform Apply
       if: github.ref != 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
-      working-directory: ./terraform/
       env:
         TF_VAR_hcloud_token: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
         TF_VAR_home_ip: ${{ secrets.TF_VAR_HOME_IP }}
