@@ -6,7 +6,7 @@ terraform {
     hostname = "app.terraform.io"
 
     workspaces {
-      tags = ["development"]
+      tags = [ var.workspace_tag ]
     }
   }
 

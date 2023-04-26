@@ -45,7 +45,9 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
+      working-directory: ./terraform/
       env:
         TF_VAR_hcloud_token: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
         TF_VAR_home_ip: ${{ secrets.TF_VAR_HOME_IP }}
         TF_VAR_home_ipv6: ${{ secrets.TF_VAR_HOME_IPV6 }}
+        TF_VAR_workspace_tag: ${{ vars.TF_VAR_WORKSPACE_TAG }}
