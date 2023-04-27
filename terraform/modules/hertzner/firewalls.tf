@@ -17,7 +17,8 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "80"
     source_ips = [
-      format("%s/32", var.home_ip)
+      format("%s/32", var.home_ip),
+      for ip in var.cloudflare_ips : ip
     ]
   }
   # https
@@ -26,7 +27,8 @@ resource "hcloud_firewall" "server_firewall" {
     protocol   = "tcp"
     port       = "443"
     source_ips = [
-      format("%s/32", var.home_ip)
+      format("%s/32", var.home_ip),
+      for ip in var.cloudflare_ips : ip
     ]
   }
   # https
