@@ -1,4 +1,4 @@
-resource "hcloud_server" "my_cisandbox" {
+resource "hcloud_server" "sandbox_leader_server" {
   name         = "mycisandbox"
   # temporarily using id due to string search issue
   # 67794396 is ubuntu 22.04

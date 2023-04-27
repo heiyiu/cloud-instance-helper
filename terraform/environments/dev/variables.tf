@@ -12,3 +12,5 @@ variable "home_ipv6" {
   sensitive = true
   default   = "::1"
 }
+
+# TODO: change instance name to a variable
