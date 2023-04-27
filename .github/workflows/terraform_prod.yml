@@ -5,7 +5,7 @@
 #
 # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 
-name: 'Terraform'
+name: 'Terraform Deployment Workflow Prod'
 
 on:
   push:
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Create hertzner cloud stack for prod use'
     runs-on: ubuntu-latest
     environment: production
 
@@ -25,6 +25,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./terraform/environments/dev
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -49,3 +50,4 @@ jobs:
         TF_VAR_hcloud_token: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
         TF_VAR_home_ip: ${{ secrets.TF_VAR_HOME_IP }}
         TF_VAR_home_ipv6: ${{ secrets.TF_VAR_HOME_IPV6 }}
+        TF_VAR_workspace_tag: ${{ vars.TF_VAR_WORKSPACE_TAG }}

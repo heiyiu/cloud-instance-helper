@@ -6,19 +6,8 @@ terraform {
     hostname = "app.terraform.io"
 
     workspaces {
-      tags = ["development"]
-    }
-  }
-
-  required_providers {
-    hcloud = {
-      source = "hetznercloud/hcloud"
-      version = "1.38.2"
+      tags = [ "production" ]
     }
   }
 }
 
-provider "hcloud" {
-  # set token in env var
-  token = var.hcloud_token
-}

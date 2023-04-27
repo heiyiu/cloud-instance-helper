@@ -1,6 +1,11 @@
+# This workflow installs the latest version of Terraform CLI and configures the Terraform CLI configuration file
+# with an API token for Terraform Cloud (app.terraform.io). On pull request events, this workflow will run
+# `terraform init`, `terraform fmt`, and `terraform plan` (speculative plan via Terraform Cloud). On push events
+# to the "main" branch, `terraform apply` will be executed.
+#
 # Documentation for `hashicorp/setup-terraform` is located here: https://github.com/hashicorp/setup-terraform
 
-name: 'Terraform'
+name: 'Terraform Deployment Workflow Dev'
 
 on:
   push:
@@ -12,7 +17,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Create hertzner cloud stack for dev use'
     runs-on: ubuntu-latest
     environment: development
 
@@ -20,6 +25,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./terraform/environments/dev
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -36,9 +42,12 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan -input=false
+    # On push to non "main" branch, build or change infrastructure according to Terraform configuration files
+    - name: Terraform Apply
+      if: github.ref != 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
       env:
         TF_VAR_hcloud_token: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
         TF_VAR_home_ip: ${{ secrets.TF_VAR_HOME_IP }}
+        TF_VAR_home_ipv6: ${{ secrets.TF_VAR_HOME_IPV6 }}
+        TF_VAR_workspace_tag: ${{ vars.TF_VAR_WORKSPACE_TAG }}
