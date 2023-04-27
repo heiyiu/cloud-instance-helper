@@ -11,23 +11,19 @@ resource "hcloud_firewall" "server_firewall" {
       format("%s/128", var.home_ipv6)
     ]
   }
-  # http       format("%s/32", var.home_ip),
+  # http       
   rule {
     direction  = "in"
     protocol   = "tcp"
     port       = "80"
-    source_ips = [
-      for ip in var.cloudflare_ips : ip
-    ]
+    source_ips = concat( format("%s/32", var.home_ip), [for ip in var.cloudflare_ips : ip] )
   }
   # https       # format("%s/32", var.home_ip),
   rule {
     direction  = "in"
     protocol   = "tcp"
     port       = "443"
-    source_ips = [
-      for ip in var.cloudflare_ips : ip
-    ]
+    source_ips = concat( format("%s/32", var.home_ip), [for ip in var.cloudflare_ips : ip] )
   }
   # https
   rule {
