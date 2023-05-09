@@ -43,6 +43,15 @@ resource "hcloud_firewall" "server_firewall" {
       format("%s/32", var.home_ip)
     ]
   }
+  # traeffik dashboard port
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "9000"
+    source_ips = [
+      format("%s/32", var.home_ip)
+    ]
+  }
   # kubernetes node ports
   rule {
     direction  = "in"
