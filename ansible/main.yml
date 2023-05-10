@@ -6,6 +6,7 @@
     ansible_remote_tmp: /tmp/
     install_k0s: false
     install_k3s: true
+    install_argocd: true
   tasks:
   # create a batch user for running batch jobs
   - name: create app user
@@ -39,3 +40,9 @@
     vars:
       k3s_installer_path: /tmp/k3s.sh
     when: install_k3s
+  - name: "install argocd"
+    ansible.builtin.include_tasks:
+      file: tasks/install_argocd.yml
+    environment:
+      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    when: install_argocd and install_k3s 
