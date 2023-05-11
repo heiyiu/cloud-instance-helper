@@ -7,6 +7,8 @@
     install_k0s: false
     install_k3s: true
     install_argocd: true
+  environment:
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
   # create a batch user for running batch jobs
   - name: create app user
@@ -45,12 +47,8 @@
       file: tasks/install_argocd.yml
     vars:
       argocd_cm_path: files/argocd_cm.yml
-    environment:
-      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
     when: install_argocd and install_k3s
   - name: "install cert-manager and configure for https"
     ansible.builtin.include_tasks:
       file: tasks/setup_https.yml
-    environment:
-      KUBECONFIG: /etc/rancher/k3s/k3s.yaml
     when: install_k3s 
