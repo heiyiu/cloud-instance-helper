@@ -4,4 +4,4 @@ runcmd:
   - apt upgrade -y
   - apt install -y python3-pip
   - python3 -m pip install ansible==7.4.0
-  - ansible-pull -U https://github.com/heiyiu/cloud-instance-helper ansible/main.yml
+  - ansible-pull -U https://github.com/heiyiu/cloud-instance-helper --checkout development ansible/main.yml
