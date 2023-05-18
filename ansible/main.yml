@@ -17,18 +17,19 @@
     vars:
       username: batch
   # install libraries needed for image processing
-  - name: "install python libraries"
-    ansible.builtin.pip:
-      name:
-        - torch==2.0.0 
-        - onnxruntime==1.14.1
-        - accelerate==0.18.0
+  # move the following into a container
+  #- name: "install python libraries"
+  #  ansible.builtin.pip:
+  #    name:
+  #      - torch==2.0.0 
+  #      - onnxruntime==1.14.1
+  #      - accelerate==0.18.0
         # following doesn't seem to install successfully on ubuntu20
         #- diffusers[torch]==0.15.1
-        - optimum[onnxruntime]==1.8.2
-      extra_args: --user
-    become: true
-    become_user: batch
+  #      - optimum[onnxruntime]==1.8.2
+  #    extra_args: --user
+  #  become: true
+  #  become_user: batch
   # install a lightweight k9s distribution
   - name: "install k0s"
     ansible.builtin.include_tasks:
