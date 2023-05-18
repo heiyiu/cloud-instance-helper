@@ -1,0 +1,25 @@
+# install libraries needed for image processing
+- name: "install python libraries for interacting with kubernetes"
+  ansible.builtin.pip:
+    name:
+      - kubernetes==26.1.0
+- name: create argocd ns
+  kubernetes.core.k8s:
+    name: argocd
+    api_version: v1
+    kind: Namespace
+    state: present
+- name: install argos
+  kubernetes.core.k8s:
+    namespace: argocd
+    state: present
+    src: https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+- name: update argocd config map for traefik support
+  kubernetes.core.k8s:
+    namespace: argocd
+    src: "{{ argocd_cm_path }}"
+    state: present
+# no builtin module to use
+# see https://github.com/ansible-collections/kubernetes.core/issues/567
+- name: restart argocd for new configmap to go into effect
+  command: kubectl -n argocd rollout restart deployment argocd-server
