@@ -1,0 +1,32 @@
+- name: install microk8s
+  community.general.snap:
+    name: microk8s
+    classic: true
+    channel: "1.27"
+  become: true
+- name: install helm
+  community.general.snap:
+    name: helm
+    classic: true
+  become: true
+- name: Add user to microk8s group
+  ansible.builtin.user:
+    name: "{{  kub_user }}"
+    groups: microk8s
+    append: yes
+  become: true
+- name: Change owner of ~/.kube directory
+  ansible.builtin.file:
+    path: ~/.kube
+    owner: "{{ kub_user }}"
+    recurse: yes
+  become: true
+# may require a su - $USER if the user instead of terraform runs the playbook
+- name: enable microk8s plugins
+  command: microk8s enable "{{ item }}"
+  loop:
+    - dns
+    - hostpath-storage
+    - helm
+    - helm3
+  become: true
