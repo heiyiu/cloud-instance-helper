@@ -10,7 +10,6 @@ name: 'Terraform Deployment Workflow Dev'
 on:
   push:
     branches: [ "development" ]
-  pull_request:
 
 permissions:
   contents: read
@@ -42,9 +41,9 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    # On push to non "main" branch, build or change infrastructure according to Terraform configuration files
+    # On push to "development" branch, build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
-      if: github.ref != 'refs/heads/main' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/development' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
       env:
         TF_VAR_hcloud_token: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
