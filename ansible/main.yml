@@ -4,10 +4,9 @@
   connection: local
   vars:
     ansible_remote_tmp: /tmp/
-    install_k0s: false
-    install_k3s: true
     kubernetes_dist: k3s # can be k0s, k3s, microk8s
     install_argocd: true
+    kube_user: cloud_user
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
@@ -47,9 +46,10 @@
   - name: "install microk8s stack"
     ansible.builtin.include_tasks:
       file: tasks/install_microk8s_stack.yml
-    vars:
-      kub_user: cloud_user
-    when: kubernetes_dist == microk8s   
+    when: kubernetes_dist == microk8s
+  - name: "install helm"
+    ansible.builtin.include_tasks:
+      file: tasks/install_helm.yml
   - name: "install argocd"
     ansible.builtin.include_tasks:
       file: tasks/install_argocd.yml
