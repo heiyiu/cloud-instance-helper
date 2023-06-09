@@ -7,8 +7,9 @@
     kubernetes_dist: k3s # can be k0s, k3s, microk8s
     install_argocd: true
     kube_user: cloud_user
+    kube_config_path: /etc/rancher/k3s/k3s.yaml
   environment:
-    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+    KUBECONFIG: "{{ kube_config_path }}"
   tasks:
   - name: "install python3-pip"
     package:

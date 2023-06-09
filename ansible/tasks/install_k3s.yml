@@ -5,3 +5,8 @@
     dest: "{{ k3s_installer_path }}"
 - name: run k3s setup script
   command: bash "{{ k3s_installer_path }}"
+- name: fix permission so the kube config file is readable by ansible/cloud_user
+  ansible.builtin.file:
+    path: "{{ kube_config_path }}"
+    mode: 0644
+  become: true
