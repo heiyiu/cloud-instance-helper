@@ -10,12 +10,20 @@
   environment:
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
-  # create a batch user for running batch jobs
-  - name: create app user
-    ansible.builtin.include_tasks:
-      file: tasks/create_user.yml
-    vars:
-      username: batch
+  - name: "install python3-pip"
+    package:
+      name: python3-pip
+      state: present
+    become: true
+  - name: "install python libraries for interacting with kubernetes"
+    ansible.builtin.pip:
+      name:
+        - kubernetes==26.1.0
+  - name: "Install collection community.network"
+    # not available in ansible 2.10.8/installed via apt
+    community.general.ansible_galaxy_install:
+      type: collection
+      name: kubernetes.core
   # install libraries needed for image processing
   # move the following into a container
   #- name: "install python libraries"
