@@ -1,8 +1,3 @@
-# install libraries needed for image processing
-- name: "install python libraries for interacting with kubernetes"
-  ansible.builtin.pip:
-    name:
-      - kubernetes==26.1.0
 - name: create argocd ns
   kubernetes.core.k8s:
     name: argocd
