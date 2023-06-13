@@ -1,0 +1,20 @@
+# download and install k0s
+- name: download terraform package
+  ansible.builtin.get_url:
+    url: https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_386.zip
+    dest: /tmp/terraformbin.zip
+- name: Create directory for extracted terraform files
+  file:
+    state: directory
+    path: /usr/local/bin
+- name: install unzip
+  package:
+    name: unzip
+    state: present
+  become: true
+# unarchive requires the unzip package
+- name: Extract terraform archive
+  unarchive:
+    src: /tmp/terraformbin.zip
+    dest: /usr/local/bin
+# make sure usr local bin is in path
