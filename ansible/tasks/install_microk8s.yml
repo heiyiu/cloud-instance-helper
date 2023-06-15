@@ -25,3 +25,10 @@
     - helm
     - helm3
   become: true
+- name: add alias to ~/.bash_aliases
+  lineinfile:
+    path: ~/.bash_aliases
+    line: 'alias k="microk8s kubectl"'
+    create: yes
+# restart the node or the ssh session since newgrp creates a new subshell and does not affect the parent shell that Ansible uses
+# likewise, this is needed for alias to go into effect

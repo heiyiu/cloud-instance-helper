@@ -54,7 +54,7 @@
     when: kubernetes_dist == "k3s"
   - name: "install microk8s stack"
     ansible.builtin.include_tasks:
-      file: tasks/install_microk8s_stack.yml
+      file: tasks/install_microk8s.yml
     when: kubernetes_dist == "microk8s"
   - name: "install helm"
     ansible.builtin.include_tasks:
@@ -64,6 +64,7 @@
       file: tasks/install_argocd.yml
     vars:
       argocd_cm_path: files/argocd_cm.yml
+    # verify argocd works on microk8s and k0s
     when: install_argocd and kubernetes_dist == "k3s"
   - name: "install cert-manager and configure for https"
     ansible.builtin.include_tasks:
