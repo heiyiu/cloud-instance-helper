@@ -54,7 +54,7 @@
     when: kubernetes_dist == "k3s"
   - name: "install microk8s stack"
     ansible.builtin.include_tasks:
-      file: tasks/install_microk8s_stack.yml
+      file: tasks/install_microk8s.yml
     when: kubernetes_dist == "microk8s"
   - name: "install helm"
     ansible.builtin.include_tasks:
