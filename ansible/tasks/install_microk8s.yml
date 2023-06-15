@@ -30,6 +30,8 @@
     path: ~/.bash_aliases
     line: 'alias k="microk8s kubectl"'
     create: yes
-  become: true
-  become_user: "{{ kube_user }}"
+- name: refresh the aliases for the current shell session
+  shell: source ~/.bash_aliases
+  args:
+    executable: /bin/bash
 # restart the node or the ssh session since newgrp creates a new subshell and does not affect the parent shell that Ansible uses
