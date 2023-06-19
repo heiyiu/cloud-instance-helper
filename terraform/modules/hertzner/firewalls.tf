@@ -61,4 +61,14 @@ resource "hcloud_firewall" "server_firewall" {
       format("%s/32", var.home_ip)
     ]
   }
+  # zomboid ports
+  rule {
+    direction  = "in"
+    protocol   = "udp"
+    port       = "16261-16262"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
 }
