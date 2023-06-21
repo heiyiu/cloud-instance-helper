@@ -1,0 +1,34 @@
+---
+- name: "vm configuration playbook"
+  hosts: localhost
+  connection: local
+  vars:
+    ansible_remote_tmp: /tmp/
+  tasks:
+  - name: "install dokcer dependency"
+    package:
+      name: " {{ item }}"
+      state: present
+    loop:
+      - python3-pip
+      - ca-certificates
+      - curl
+    become: true
+  - name: "setup keyrings"
+    shell: install -m 0755 -d /etc/apt/keyrings && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg && chmod a+r /etc/apt/keyrings/docker.gpg
+    become: true
+  - name: "setup repo"
+    shell: echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    become: true
+  - name: "install docker"
+    package:
+      name: " {{ item }}"
+      state: present
+    loop:
+      - docker-ce
+      - docker-ce-cli 
+      - containerd.io 
+      - docker-buildx-plugin 
+      - docker-compose-plugin
+    become: true
+    
