@@ -43,7 +43,7 @@ jobs:
 
     # On push to "development" branch, build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/development' && github.event_name == 'push'
+      if: (github.ref == 'refs/heads/development' || github.ref == 'refs/heads/develop' ) && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
       env:
         TF_VAR_hcloud_token: ${{ secrets.TF_VAR_HCLOUD_TOKEN }}
