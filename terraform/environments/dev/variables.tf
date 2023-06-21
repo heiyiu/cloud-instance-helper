@@ -15,6 +15,6 @@ variable "home_ipv6" {
 
 # which cloudinit setup to run
 variable "cloud_init_filename" {
-  default = cloud-init-docker.yaml
+  default = "cloud-init-docker.yaml"
 }
 # TODO: change instance name to a variable
