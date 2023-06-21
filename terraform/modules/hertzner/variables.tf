@@ -37,3 +37,6 @@ variable "cloudflare_ips" {
     "2c0f:f248::/32"
   ]
 }
+
+variable "cloud_init_filename" {
+}

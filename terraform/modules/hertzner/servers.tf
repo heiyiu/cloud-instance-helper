@@ -8,7 +8,7 @@ resource "hcloud_server" "sandbox_leader_server" {
   server_type  = "cpx21"
   location     = "ash"
   firewall_ids = [hcloud_firewall.server_firewall.id]
-  user_data    = file("${path.module}/files/cloud-init.yaml")
+  user_data    = file(format("%s/files/%s", path.module, var.cloud_init_filename))
   ssh_keys     = [hcloud_ssh_key.batch_user_key.id]
   # ipv6 only is cheaper
 
