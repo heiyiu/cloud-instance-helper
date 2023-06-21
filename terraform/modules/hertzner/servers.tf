@@ -5,7 +5,7 @@ resource "hcloud_server" "sandbox_leader_server" {
   image        = "67794396"
   # use cpx51 for ai image generation
   # use cpx11 for regular cloud work
-  server_type  = "cpx11"
+  server_type  = "cpx21"
   location     = "ash"
   firewall_ids = [hcloud_firewall.server_firewall.id]
   user_data    = file("${path.module}/files/cloud-init.yaml")
