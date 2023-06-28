@@ -10,6 +10,12 @@ variable "home_ipv6" {
   sensitive = true
 }
 
+variable "instance_size" {
+}
+
+variable "instance_name" {
+}
+
 variable "cloudflare_ips" {
   type      = list(string)
   default   = [
