@@ -17,4 +17,13 @@ variable "home_ipv6" {
 variable "cloud_init_filename" {
   default = "cloud-init-docker.yaml"
 }
-# TODO: change instance name to a variable
+
+variable "instance_size" {
+  # use cpx51 for ai image generation
+  # use cpx11 for regular cloud work
+  default   = "cpx31"
+}
+
+variable "instance_name" {
+  default  = "zomboidds"
+}
