@@ -21,7 +21,7 @@ variable "cloud_init_filename" {
 variable "instance_size" {
   # use cpx51 for ai image generation
   # use cpx11 for regular cloud work
-  default   = "cpx41"
+  default   = "cpx31"
 }
 
 variable "instance_name" {
