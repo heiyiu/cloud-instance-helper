@@ -1,3 +1,7 @@
+data "hcloud_volume" "zom_game_volume" {
+  name = "zomboid-data"
+}
+
 resource "hcloud_server" "sandbox_leader_server" {
   name         = var.instance_name
   # temporarily using id due to string search issue
@@ -17,5 +21,16 @@ resource "hcloud_server" "sandbox_leader_server" {
 
   depends_on   = [
     hcloud_firewall.server_firewall
+  ]
+}
+
+resource "hcloud_volume_attachment" "zgvol_attachment" {
+  # do not create if volume does not exist 
+  count     = data.hcloud_volume.zom_game_volume.id != "" ? 1 : 0
+  server_id = hcloud_server.sandbox_leader_server.id
+  volume_id = data.hcloud_volume.zom_game_volume.id
+
+  depends_on = [
+    hcloud_server.sandbox_leader_server
   ]
 }
