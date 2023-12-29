@@ -1,9 +1,11 @@
+# use to create volume for first run
 resource "hcloud_volume" "game_volume" {
   # remove from state file
   name      = "gamevol"
   size      = 20
   format    = "ext4"
   location  = var.instance_location
+  count     = 1
 }
 
 resource "hcloud_server" "sandbox_leader_server" {
