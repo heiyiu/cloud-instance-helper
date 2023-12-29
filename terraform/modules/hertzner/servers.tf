@@ -1,11 +1,7 @@
-# use to create volume for first run
-resource "hcloud_volume" "game_volume" {
-  # remove from state file
-  name      = "gamevol"
-  size      = 20
-  format    = "ext4"
-  location  = var.instance_location
-  count     = 1
+# do not create volume thru terraform
+# create thru UI and select ext4
+data "hcloud_volume" "game_volume" {
+  name = "ck-data"
 }
 
 resource "hcloud_server" "sandbox_leader_server" {
@@ -33,7 +29,7 @@ resource "hcloud_server" "sandbox_leader_server" {
 
 resource "hcloud_volume_attachment" "gvol_attachment" {
   server_id = hcloud_server.sandbox_leader_server.id
-  volume_id = hcloud_volume.game_volume[0].id
+  volume_id = hcloud_volume.game_volume.id
 
   depends_on = [
     hcloud_server.sandbox_leader_server,
