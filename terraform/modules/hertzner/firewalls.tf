@@ -71,4 +71,14 @@ resource "hcloud_firewall" "server_firewall" {
       "::/0"
     ]
   }
+  # ck ports
+  rule {
+    direction  = "in"
+    protocol   = "udp"
+    port       = "27015-27016"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
 }
