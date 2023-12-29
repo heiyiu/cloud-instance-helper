@@ -2,6 +2,7 @@
 # create thru UI and select ext4
 data "hcloud_volume" "game_volume" {
   name = "ck-data"
+  count = var.existing_volume ? 1 : 0
 }
 
 resource "hcloud_server" "sandbox_leader_server" {
@@ -30,7 +31,7 @@ resource "hcloud_server" "sandbox_leader_server" {
 resource "hcloud_volume_attachment" "gvol_attachment" {
   count     = data.hcloud_volume.game_volume.id != "" ? 1 : 0
   server_id = hcloud_server.sandbox_leader_server.id
-  volume_id = data.hcloud_volume.game_volume
+  volume_id = data.hcloud_volume.game_volume.id
 
   depends_on = [
     hcloud_server.sandbox_leader_server

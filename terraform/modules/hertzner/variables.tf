@@ -49,3 +49,7 @@ variable "cloudflare_ips" {
 
 variable "cloud_init_filename" {
 }
+
+variable "existing_volume" {
+  type = bool
+}

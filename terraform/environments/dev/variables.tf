@@ -31,3 +31,7 @@ variable "instance_name" {
 variable "instance_location"{
   default = "hil"
 }
+
+variable "existing_volume" {
+  default = false
+}
