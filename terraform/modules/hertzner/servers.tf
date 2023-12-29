@@ -1,7 +1,11 @@
 resource "hcloud_volume" "game_volume" {
-  count     = data.hcloud_volume.game_volume.id == null ? 1 : 0
+  # remove from state file
   name      = "gamevol"
   size      = 20
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "hcloud_server" "sandbox_leader_server" {
@@ -27,13 +31,12 @@ resource "hcloud_server" "sandbox_leader_server" {
   ]
 }
 
-resource "hcloud_volume_attachment" "zgvol_attachment" {
-  # do not create if volume does not exist 
-  count     = data.hcloud_volume.game_volume.id != "" ? 1 : 0
+resource "hcloud_volume_attachment" "gvol_attachment" {
   server_id = hcloud_server.sandbox_leader_server.id
   volume_id = data.hcloud_volume.game_volume.id
 
   depends_on = [
-    hcloud_server.sandbox_leader_server
+    hcloud_server.sandbox_leader_server,
+    hcloud_volume.game_volume
   ]
 }
