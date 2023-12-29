@@ -4,9 +4,6 @@ resource "hcloud_volume" "game_volume" {
   size      = 20
   format    = "ext4"
   location  = var.instance_location
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "hcloud_server" "sandbox_leader_server" {
