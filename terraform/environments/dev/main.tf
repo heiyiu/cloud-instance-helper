@@ -8,4 +8,5 @@ module "hertzner_cloud_stack" {
   instance_size       = var.instance_size
   instance_name       = var.instance_name
   instance_location   = var.instance_location
+  existing_volume     = var.existing_volume
 }
