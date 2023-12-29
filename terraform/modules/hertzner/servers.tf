@@ -33,7 +33,7 @@ resource "hcloud_server" "sandbox_leader_server" {
 
 resource "hcloud_volume_attachment" "gvol_attachment" {
   server_id = hcloud_server.sandbox_leader_server.id
-  volume_id = data.hcloud_volume.game_volume.id
+  volume_id = hcloud_volume.game_volume.id
 
   depends_on = [
     hcloud_server.sandbox_leader_server,
