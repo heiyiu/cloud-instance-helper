@@ -28,11 +28,11 @@ resource "hcloud_server" "sandbox_leader_server" {
 }
 
 resource "hcloud_volume_attachment" "gvol_attachment" {
+  count     = data.hcloud_volume.game_volume.id != "" ? 1 : 0
   server_id = hcloud_server.sandbox_leader_server.id
-  volume_id = hcloud_volume.game_volume.id
+  volume_id = data.hcloud_volume.game_volume
 
   depends_on = [
-    hcloud_server.sandbox_leader_server,
-    hcloud_volume.game_volume
+    hcloud_server.sandbox_leader_server
   ]
 }
