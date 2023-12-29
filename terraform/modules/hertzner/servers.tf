@@ -2,7 +2,7 @@ resource "hcloud_volume" "game_volume" {
   # remove from state file
   name      = "gamevol"
   size      = 20
-
+  location  = var.instance_location
   lifecycle {
     prevent_destroy = true
   }
