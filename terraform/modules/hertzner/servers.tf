@@ -8,7 +8,8 @@ resource "hcloud_server" "sandbox_leader_server" {
   # 67794396 is ubuntu 22.04
   image        = "67794396"
   server_type  = var.instance_size
-  location     = "ash"
+  # use ash for VA, USA
+  location     = "hil"
   firewall_ids = [hcloud_firewall.server_firewall.id]
   user_data    = file(format("%s/files/%s", path.module, var.cloud_init_filename))
   ssh_keys     = [hcloud_ssh_key.batch_user_key.id]
