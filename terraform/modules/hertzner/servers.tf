@@ -9,7 +9,7 @@ resource "hcloud_server" "sandbox_leader_server" {
   image        = "67794396"
   server_type  = var.instance_size
   # use ash for VA, USA
-  location     = "hil"
+  location     = var.instance_location
   firewall_ids = [hcloud_firewall.server_firewall.id]
   user_data    = file(format("%s/files/%s", path.module, var.cloud_init_filename))
   ssh_keys     = [hcloud_ssh_key.batch_user_key.id]

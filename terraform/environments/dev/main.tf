@@ -7,4 +7,5 @@ module "hertzner_cloud_stack" {
   cloud_init_filename = var.cloud_init_filename
   instance_size       = var.instance_size
   instance_name       = var.instance_name
+  instance_location   = var.instance_location
 }

@@ -16,6 +16,9 @@ variable "instance_size" {
 variable "instance_name" {
 }
 
+variable "instance_location" {
+}
+
 variable "cloudflare_ips" {
   type      = list(string)
   default   = [

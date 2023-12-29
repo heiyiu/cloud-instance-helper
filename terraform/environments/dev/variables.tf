@@ -27,3 +27,7 @@ variable "instance_size" {
 variable "instance_name" {
   default  = "zomboidds"
 }
+
+variable "instance_location"{
+  default = "hil"
+}
