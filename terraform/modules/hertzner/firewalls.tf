@@ -91,4 +91,14 @@ resource "hcloud_firewall" "server_firewall" {
       "::/0"
     ]
   }
+  # palworld port
+  rule {
+    direction  = "in"
+    protocol   = "udp"
+    port       = "8211"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
 }
